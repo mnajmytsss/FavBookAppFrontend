@@ -10,13 +10,13 @@ const HomePage = () => {
           <Typography style={{margin: '20px'}} variant="h5" component="div" gutterBottom>
             Home Page
           </Typography>
-          <Button style={{margin: '10px'}} variant="contained" color="primary" component={Link} to="/najmys-api">
+          <Button style={{margin: '10px'}} variant="contained" color="primary" component={Link} to="/najmy">
             Najmy's API
           </Button>
-          <Button style={{margin: '10px'}} variant="contained" color="primary" component={Link} to="/avicenas-api">
+          <Button style={{margin: '10px'}} variant="contained" color="primary" component={Link} to="/avicena">
             Avicena's API
           </Button>
-          <Button style={{margin: '10px'}} variant="contained" color="primary" component={Link} to="/deffis-api">
+          <Button style={{margin: '10px'}} variant="contained" color="primary" component={Link} to="/deffi">
             Deffi's API
           </Button>
         </CardContent>
