@@ -1,9 +1,9 @@
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
-import AvicenaDashboard from "./pages/AvicenaPage";
-import DeffiDashboard from "./pages/DeffiPage";
-import NajmyDashboard from "./pages/NajmyPage";
-import HomePage from "./pages/HomePage";
-import Error from "./pages/NotFoundPage";
+import AvicenaDashboard from "./pages/avicenaPage";
+import DeffiDashboard from "./pages/deffiPage";
+import NajmyDashboard from "./pages/najmyPage";
+import HomePage from "./pages/homePage";
+import Error from "./pages/notFoundPage";
 
 function App() {
   const router = createBrowserRouter([
