@@ -11,7 +11,7 @@ const [editModalOpen, setEditModalOpen] = useState(false);
 
       const fetchBooks = async () => {
         try {
-          const response = await axios.get('http://localhost:4321/api/books');
+          const response = await axios.get('http://localhost:4321/api/v1/books');
                     const booksData = response.data.data;
       
           if (Array.isArray(booksData)) {
@@ -45,7 +45,7 @@ useEffect(() => {
 
   const handleEditSubmit = async () => {
     try {
-      await axios.put(`http://localhost:4321/api/books/${selectedBook.id}`, {
+      await axios.put(`http://localhost:4321/api/v1/books/${selectedBook.id}`, {
         name: selectedBook.name,
         author: selectedBook.author,
       });
@@ -60,7 +60,7 @@ useEffect(() => {
   const handleDelete = async (id) => {
     try {
 
-      await axios.delete(`http://localhost:4321/api/books/${id}`);
+      await axios.delete(`http://localhost:4321/api/v1/books/${id}`);
 
       setBooks((prevBooks) => prevBooks.filter((book) => book.id !== id));
     } catch (error) {
