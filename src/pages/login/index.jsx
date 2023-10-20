@@ -1,4 +1,4 @@
-// LoginForm.js
+
 import { useState } from 'react';
 import { TextField, Button, Typography, Link, Card } from '@mui/material';
 import axios from 'axios';
@@ -30,7 +30,7 @@ const LoginForm = () => {
         showConfirmButton: false,
         timer: 1500, 
       });
-      navigate('/homepages'); // Sesuaikan dengan path yang benar-benar digunakan dalam rute.
+      navigate('/homepages'); 
     } catch (error) {
       console.error('Login error:', error.message);
       Swal.fire({

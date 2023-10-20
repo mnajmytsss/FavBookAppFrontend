@@ -11,12 +11,16 @@ function App() {
       element: <RegisterForm />
     },
     {
-      path: "/loginform",
-      element: <LoginForm />
+      path: "/avicena",
+      element: <AvicenaDashboard />
     },
     {
-      path: "/homepages",
-      element: <HomePage />
+      path: "/deffi",
+      element: <DeffiDashboard />
+    },
+    {
+      path: "/najmy",
+      element: <NajmyDashboard />
     },
     {
       path: "*",
