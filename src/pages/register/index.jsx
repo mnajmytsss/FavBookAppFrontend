@@ -1,8 +1,8 @@
 import { useState } from 'react';
 import { TextField, Button, Typography, Link, Select, MenuItem, FormControl, InputLabel, Card } from '@mui/material';
 import axios from 'axios';
-import Swal from 'sweetalert2';
 import { useNavigate } from 'react-router-dom';
+import { showAlert, API_BASE_URL } from '../function'
 
 const RegisterForm = () => {
   const [username, setUsername] = useState('');
@@ -17,34 +17,20 @@ const RegisterForm = () => {
 
   const handleRegister = async () => {
     try {
-      const response = await axios.post('https://us-central1-revou-fullstack.cloudfunctions.net/week_17_mnajmytsss/auth/register', {
+      const response = await axios.post(`${API_BASE_URL}/auth/register`, {
         username,
         password,
         role,
       });
-
-      Swal.fire({
-        icon: 'success',
-        title: 'Registration Successful!',
-        text: 'You can now log in with your credentials.',
-      });
-
+      showAlert('success', 'Registration Successful!', 'You can now log in with your credentials.');
       console.log('Registration successful:', response.data);
       navigate('/loginform');
     } catch (error) {
 
       if (error.response && error.response.status === 400 && error.response.data.message) {
-        Swal.fire({
-          icon: 'error',
-          title: 'Registration Failed',
-          text: error.response.data.message,
-        });
+        showAlert('error', 'Registration Failed', `<b>[CODE] ${error.response.data.message}</b><br>Please check your username and password`);
       } else {
-        Swal.fire({
-          icon: 'error',
-          title: 'Registration Failed',
-          text: 'An error occurred during registration. Please try again later.',
-        });
+        showAlert('error', 'Registration Faied', `<b>[CODE] </b><br>An error occurred during registration. Please try again later.`);
       }
 
       console.error('Registration error:', error.message);

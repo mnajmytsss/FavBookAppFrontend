@@ -2,25 +2,20 @@
 // eslint-disable-next-line no-unused-vars
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-import Swal from "sweetalert2";
 import { Card, CardContent, Typography, Table, TableContainer, TableHead, TableRow, TableCell, TableBody, Paper, Button, Modal, TextField } from '@mui/material';
+import { showAlert, API_BASE_URL, getHeaders } from '../function'
 
 const HomePage = () => {
   const [books, setBooks] = useState([]);
   const [addModalOpen, setAddModalOpen] = useState(false);
-const [editModalOpen, setEditModalOpen] = useState(false);
+  const [editModalOpen, setEditModalOpen] = useState(false);
   const [selectedBook, setSelectedBook] = useState({ id: '', name: '', author: '' });
-   const [newBook, setNewBook] = useState({ name: '', author: '' });
-   const token = localStorage.getItem('token');
+  const [newBook, setNewBook] = useState({ name: '', author: '' });
 
-   const fetchBooks = async () => {
+  const fetchBooks = async () => {
     try {
-            const response = await axios.get('https://us-central1-revou-fullstack.cloudfunctions.net/week_17_mnajmytsss/api/v1/books', {
-  headers: {
-    Authorization: `Bearer ${token}`,
-  },
-});
-            const booksData = response.data.data;
+        const response = await axios.get(`${API_BASE_URL}/api/v1/books`, getHeaders());
+        const booksData = response.data.data;
 
       if (Array.isArray(booksData)) {
         const formattedBooks = booksData.map(book => ({
@@ -29,92 +24,55 @@ const [editModalOpen, setEditModalOpen] = useState(false);
           author: book.author,
         }));
         setBooks(formattedBooks);
-      } else {
-        console.error('Error: API response does not contain an array of books', response);
-      }
-    } catch (error) {
-      console.error("Error creating book:", error);
-      Swal.fire({
-        icon: "error",
-        title: `Oops...`,
-        html: `<b>[CODE] ${error.code}</b><br>Something went wrong!`,
-      });
-    }
-  };
-
-      useEffect(() => {
-        fetchBooks();
-      }, []);
+        } else {
+          console.error('Error: API response does not contain an array of books', response);
+        }
+        } catch (error) {
+        console.error("Error creating book:", error);
+        showAlert('error', 'Oops...', `<b>[CODE] ${error.code}</b><br>Something went wrong!`);
+        }
+        };
+          useEffect(() => {
+            fetchBooks();
+          }, []);
 
   const handleEdit = (id) => {
-    const bookToEdit = books.find((book) => book.id === id);
-    setSelectedBook(bookToEdit);
-    setEditModalOpen(true);
+        const bookToEdit = books.find((book) => book.id === id);
+        setSelectedBook(bookToEdit);
+        setEditModalOpen(true);
   };
 
   const handleEditModalClose = () => {
-    setEditModalOpen(false);
-  };
+        setEditModalOpen(false);
+      };
 
   const handleEditSubmit = async () => {
     try {
-      const token = localStorage.getItem('token');
-  
       await axios.put(
-        `https://us-central1-revou-fullstack.cloudfunctions.net/week_17_mnajmytsss/api/v1/books/${selectedBook.id}`,
+        `${API_BASE_URL}/api/v1/books/${selectedBook.id}`,
         {
           name: selectedBook.name,
           author: selectedBook.author,
-        },
-        {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        }
-      );
+        },getHeaders);
   
       setEditModalOpen(false);
       fetchBooks();
-      Swal.fire({
-        icon: 'success',
-        title: 'Book Edited Successfully',
-        showConfirmButton: false,
-        timer: 1500,
-      });
+      showAlert('success', 'Book Edited Successfully', '');
     } catch (error) {
       console.error("Error edit book:", error);
       setEditModalOpen(false);
-      Swal.fire({
-        icon: "error",
-        title: `Oops...`,
-        html: `<b>[CODE] ${error.code}</b><br>Something went wrong!`,
-      });
+      showAlert('error', 'Oops...', `<b>[CODE] ${error.code}</b><br>Something went wrong!`);
     }
   };
 
   const handleDelete = async (id) => {
     try {
-
-      await axios.delete(`https://us-central1-revou-fullstack.cloudfunctions.net/week_17_mnajmytsss/api/v1/books/${id}`, {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      });
-
+      await axios.delete(`${API_BASE_URL}/api/v1/books/${id}`, getHeaders());
       setBooks((prevBooks) => prevBooks.filter((book) => book.id !== id));
-      Swal.fire({
-        icon: 'success',
-        title: 'Book Successfully Deleted',
-        showConfirmButton: false,
-        timer: 1500,
-      });
+      showAlert('success', 'Book Successfully Deleted', '');
     } catch (error) {
         console.error("Error creating book:", error);
-        Swal.fire({
-          icon: "error",
-          title: `Oops...`,
-          html: `<b>[CODE] ${error.code}</b><br>Something went wrong!`,
-        });
+        showAlert('error', 'Oops...', `<b>[CODE] ${error.code}</b><br>Something went wrong!`);
     }
   };
 
@@ -127,39 +85,24 @@ const [editModalOpen, setEditModalOpen] = useState(false);
 
   const handleAddBook = async () => {
     try {
-      await axios.post('https://us-central1-revou-fullstack.cloudfunctions.net/week_17_mnajmytsss/api/v1/books', {
+      await axios.post(`${API_BASE_URL}/api/v1/books`, {
         name: newBook.name, 
         author: newBook.author,  
       },
-      {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      }
-      );
-
-
+      getHeaders());
       setAddModalOpen(false);
       setNewBook({ name: '', author: '' }); 
       fetchBooks();
+      showAlert('success', 'Book Successfully Added', '');
     } catch (error) {
         console.error("Error creating book:", error);
-        Swal.fire({
-          icon: "error",
-          title: `Oops...`,
-          html: `<b>[CODE] ${error.code}</b><br>Something went wrong!`,
-        });
+        showAlert('error', 'Oops...', `<b>[CODE] ${error.code}</b><br>Something went wrong!`);
     }
   };
 
   const handleLogout = () => {
     localStorage.removeItem('token');
-    Swal.fire({
-      icon: 'success',
-      title: 'Logout Successful',
-      showConfirmButton: false,
-      timer: 1500, 
-    }); 
+    showAlert('success', 'Logout Successful', '');
     history.push('/loginform'); 
   };
 

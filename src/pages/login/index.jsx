@@ -2,8 +2,8 @@
 import { useState } from 'react';
 import { TextField, Button, Typography, Link, Card } from '@mui/material';
 import axios from 'axios';
-import Swal from 'sweetalert2';
 import { useNavigate } from 'react-router-dom';
+import { showAlert, API_BASE_URL } from '../function'
 
 const LoginForm = () => {
   const [username, setUsername] = useState('');
@@ -17,27 +17,18 @@ const LoginForm = () => {
 
   const handleLogin = async () => {
     try {
-      const response = await axios.post('https://us-central1-revou-fullstack.cloudfunctions.net/week_17_mnajmytsss/auth/login', {
+      const response = await axios.post(`${API_BASE_URL}/auth/login`, {
         username,
         password,
       });
       const token = response.data.data;
       localStorage.setItem('token', token);
       console.log('Login successful:', response.data);
-      Swal.fire({
-        icon: 'success',
-        title: 'Login Successful',
-        showConfirmButton: false,
-        timer: 1500, 
-      });
+      showAlert('success', 'Successfully loged ini', '');
       navigate('/homepages'); 
     } catch (error) {
       console.error('Login error:', error.message);
-      Swal.fire({
-        icon: 'error',
-        title: 'Login Failed',
-        text: 'Please check your username and password',
-      });
+      showAlert('error', 'Login Failed', `<b>[CODE] ${error.code}</b><br>Please check your username and password`);
     }
   };
 
