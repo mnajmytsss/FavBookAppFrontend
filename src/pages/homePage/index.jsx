@@ -109,15 +109,15 @@ const HomePage = () => {
   return (
     <Card>
       <CardContent>
-        <Typography variant="h5" component="div" style={{display: 'flex', justifyContent: 'center', marginBottom: '20px'}}>
+        <Typography variant="h5" component="div" style={{ textAlign: 'center', marginBottom: '20px' }}>
           Najmy's Fav Book
         </Typography>
         <Button variant="contained" color="primary" onClick={() => setAddModalOpen(true)} style={{ marginBottom: '20px' }}>
-  Add Book
-</Button>
-<Button href='/loginform' style={{ marginBottom: '20px' }} onClick={handleLogout}>
-  Logout
-</Button>
+          Add Book
+        </Button>
+        <Button href='/loginform' style={{ marginBottom: '20px' }} onClick={handleLogout}>
+          Logout
+        </Button>
         <Modal open={addModalOpen} onClose={() => setAddModalOpen(false)}>
           <div style={{
             position: 'absolute',
@@ -138,16 +138,16 @@ const HomePage = () => {
               name="name"
               value={newBook.name}
               onChange={(e) => setNewBook({ ...newBook, name: e.target.value })}
-              style={{ marginBottom: '20px' }}
+              style={{ marginBottom: '20px', width: '100%' }}
             />
             <TextField
               label="Author"
               name="author"
               value={newBook.author}
               onChange={(e) => setNewBook({ ...newBook, author: e.target.value })}
-              style={{ marginBottom: '20px' }}
+              style={{ marginBottom: '20px', width: '100%' }}
             />
-            <Button variant="contained" color="primary" onClick={handleAddBook} style={{ marginTop: '10px' }}>
+            <Button variant="contained" color="primary" onClick={handleAddBook} style={{ marginTop: '10px', width: '100%' }}>
               Add Book
             </Button>
           </div>
@@ -181,7 +181,6 @@ const HomePage = () => {
             </TableBody>
           </Table>
         </TableContainer>
-
         <Modal open={editModalOpen} onClose={handleEditModalClose}>
           <div style={{
             position: 'absolute',
@@ -202,16 +201,16 @@ const HomePage = () => {
               name="name"
               value={selectedBook.name}
               onChange={handleInputChange}
-              style={{ marginBottom: '20px' }}
+              style={{ marginBottom: '20px', width: '100%' }}
             />
             <TextField
               label="Author"
               name="author"
               value={selectedBook.author}
               onChange={handleInputChange}
-              style={{ marginBottom: '20px' }}
+              style={{ marginBottom: '20px', width: '100%' }}
             />
-            <Button variant="contained" color="primary" onClick={handleEditSubmit} style={{ marginTop: '10px' }}>
+            <Button variant="contained" color="primary" onClick={handleEditSubmit} style={{ marginTop: '10px', width: '100%' }}>
               Save Changes
             </Button>
           </div>

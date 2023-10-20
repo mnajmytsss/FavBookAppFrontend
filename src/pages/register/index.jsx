@@ -11,7 +11,7 @@ const RegisterForm = () => {
   const navigate = useNavigate();
 
   const handleLoginLinkClick = (e) => {
-    e.preventDefault(); 
+    e.preventDefault();
     navigate('/loginform');
   }
 
@@ -37,9 +37,8 @@ const RegisterForm = () => {
     }
   };
 
-
   return (
-    <Card style={{ textAlign: 'center', margin: '20px', padding: '30px' }}>
+    <Card style={{ textAlign: 'center', margin: '20px auto', padding: '30px', maxWidth: '400px' }}>
       <Typography variant="h4" gutterBottom>
         Register
       </Typography>
@@ -75,7 +74,7 @@ const RegisterForm = () => {
           <MenuItem value="admin">Admin</MenuItem>
         </Select>
       </FormControl>
-      <Button variant="contained" color="primary" onClick={handleRegister} style={{ marginTop: '20px'}}>
+      <Button variant="contained" color="primary" onClick={handleRegister} style={{ marginTop: '20px' }}>
         Register
       </Button>
       <Typography style={{ marginTop: '10px', paddingTop: '10px' }}>
