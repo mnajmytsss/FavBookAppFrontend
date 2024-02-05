@@ -4,6 +4,7 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { Card, CardContent, Typography, Table, TableContainer, TableHead, TableRow, TableCell, TableBody, Paper, Button, Modal, TextField } from '@mui/material';
 import { showAlert, API_BASE_URL, getHeaders } from '../function'
+import './styles.css';
 
 const HomePage = () => {
   const [books, setBooks] = useState([]);
@@ -108,7 +109,7 @@ const HomePage = () => {
 
   return (
     <Card>
-      <CardContent>
+      <CardContent className="card-content">
         <Typography variant="h5" component="div" style={{ textAlign: 'center', marginBottom: '20px' }}>
           Najmy's Fav Book
         </Typography>

@@ -32,7 +32,6 @@ const RegisterForm = () => {
       } else {
         showAlert('error', 'Registration Faied', `<b>[CODE] </b><br>An error occurred during registration. Please try again later.`);
       }
-
       console.error('Registration error:', error.message);
     }
   };

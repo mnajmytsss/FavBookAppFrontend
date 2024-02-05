@@ -1,6 +1,6 @@
 
 import { useState } from 'react';
-import { TextField, Button, Typography, Link, Card, Grid } from '@mui/material';
+import { TextField, Button, Typography, Link, Card } from '@mui/material';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import { showAlert, API_BASE_URL } from '../function'
@@ -33,47 +33,38 @@ const LoginForm = () => {
   };
 
   return (
-    <Grid container justifyContent="center">
-      <Grid item xs={12} sm={8} md={6} lg={4}>
-        <Card style={{ textAlign: 'center', margin: '20px', padding: '30px' }}>
-          <Typography variant="h4" gutterBottom>
-            Login
-          </Typography>
-          <TextField
-            label="Username"
-            variant="outlined"
-            fullWidth
-            margin="normal"
-            placeholder="Enter your username"
-            value={username}
-            onChange={(e) => setUsername(e.target.value)}
-          />
-          <TextField
-            label="Password"
-            type="password"
-            variant="outlined"
-            fullWidth
-            margin="normal"
-            placeholder="Enter your password"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-          />
-          <Button
-            variant="contained"
-            color="primary"
-            onClick={handleLogin}
-            style={{ marginTop: '20px' }}
-          >
-            Login
-          </Button>
-          <Typography style={{ marginTop: '10px', paddingTop: '10px' }}>
-            <Link href="#" onClick={handleRegisterLinkClick}>
-              Register here if you dont have an account
-            </Link>
-          </Typography>
-        </Card>
-      </Grid>
-    </Grid>
+    <Card style={{ textAlign: 'center', margin: '20px auto', padding: '30px', maxWidth: '400px' }}>
+      <Typography  variant="h4" gutterBottom>
+        Login
+      </Typography>
+      <TextField
+        label="Username"
+        variant="outlined"
+        fullWidth
+        margin="normal"
+        placeholder="Enter your username"
+        value={username}
+        onChange={(e) => setUsername(e.target.value)}
+      />
+      <TextField
+        label="Password"
+        type="password"
+        variant="outlined"
+        fullWidth
+        margin="normal"
+        placeholder="Enter your password"
+        value={password}
+        onChange={(e) => setPassword(e.target.value)}
+      />
+      <Button variant="contained" color="primary" onClick={handleLogin} style={{ marginTop: '20px'}}>
+        Login
+      </Button>
+      <Typography style={{ marginTop: '10px', paddingTop: '10px' }}>
+        <Link href="#" onClick={handleRegisterLinkClick}>
+          Register here if you dont have an account
+        </Link>
+      </Typography>
+    </Card>
   );
 };
 

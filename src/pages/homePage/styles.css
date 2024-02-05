@@ -1,0 +1,73 @@
+/* styles.css */
+
+/* Common styles for both mobile and tablet */
+.card-content {
+    text-align: center;
+    margin-bottom: 20px;
+  }
+  
+  .button-container {
+    margin-bottom: 20px;
+  }
+  
+  .modal-container {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: white;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  /* Mobile styles */
+  @media only screen and (max-width: 600px) {
+    .table-cell-label {
+      display: block;
+      font-weight: bold;
+      margin-bottom: 5px;
+    }
+  
+    .table-cell-value {
+      display: block;
+      margin-bottom: 15px;
+    }
+  
+    .table-cell-actions {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+  
+    .modal-container {
+      width: 80%;
+    }
+  }
+  
+  /* Tablet styles */
+  @media only screen and (min-width: 601px) and (max-width: 1024px) {
+    .table-cell-label {
+      display: inline-block;
+      width: 100px;
+      font-weight: bold;
+    }
+  
+    .table-cell-value {
+      display: inline-block;
+      width: calc(100% - 100px);
+      margin-bottom: 0;
+    }
+  
+    .table-cell-actions {
+      display: inline-block;
+      width: calc(100% - 100px);
+      margin-top: 10px;
+    }
+  
+    .modal-container {
+      width: 60%;
+    }
+  }
+  
